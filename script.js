@@ -23,19 +23,19 @@ const emptyQs = () => grid().filter((_qEL) => _qEL.innerText === '');
 const allSame = (arr) => arr.every((_qEL) => _qEL.innerText === arr[0].innerText && _qEL.innerText !== '');
 
 // user's turn
-const takeTurn = (index, letter) => (grid()[index].innerText = letter);
+const takeTurn = (index, letter) => {
+	let turnSuccess = true;
+	if (grid()[index].innerText !== '') {
+		turnSuccess = false;
+		return;
+	}
+
+	grid()[index].innerText = letter;
+	return turnSuccess;
+};
 
 // opponent's choice
 const opponentChoice = () => qNumId(emptyQs()[Math.floor(Math.random() * emptyQs().length)]);
-
-// stop user from clicking on occupied position
-const noClick = ($event) => {
-	if ($event.target.innerText !== '') {
-		disableListeners();
-	} else {
-		enableListeners();
-	}
-};
 
 // end game
 const endGame = (winningSequence) => {
@@ -61,15 +61,13 @@ const checkForVictory = () => {
 const opponentTurn = () => {
 	disableListeners();
 	setTimeout(() => {
-		takeTurn(opponentChoice(), 'O');
-		if (!checkForVictory()) enableListeners();
+		if (takeTurn(opponentChoice(), 'O') && !checkForVictory()) enableListeners();
 	}, 1000);
 };
 
 // click events
 const clickFn = ($event) => {
-	takeTurn(qNumId($event.target), 'X');
-	if (!checkForVictory()) opponentTurn();
+	if (takeTurn(qNumId($event.target), 'X') && !checkForVictory()) opponentTurn();
 };
 
 const enableListeners = () => grid().forEach((_qEL) => _qEL.addEventListener('click', clickFn));
