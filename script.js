@@ -1,3 +1,8 @@
+// To do list
+// Add a score board
+// Implement a modal so that user can modify player name
+// Add a victory message
+
 const winningCombos = [
 	[ 0, 1, 2 ],
 	[ 3, 4, 5 ],
@@ -9,20 +14,21 @@ const winningCombos = [
 	[ 2, 5, 8 ]
 ];
 
-// covert node list to array, this is the entire grid
+// Coverts node list to array, this is the entire grid
 const grid = () => Array.from(document.querySelectorAll('.q'));
 // console.log(grid());
 
-// covert id to int
+// Passes in a div element, separate its ID and  covert it to int
 const qNumId = (qEL) => Number.parseInt(qEL.id.replace('q', ''));
 
-// find empty Qs
+// Returns all elements within the grid that are empty
 const emptyQs = () => grid().filter((_qEL) => _qEL.innerText === '');
 
-// check if elements in an array are the same
+// Checks an array of div elements if they all hold 'X' or 'O'
 const allSame = (arr) => arr.every((_qEL) => _qEL.innerText === arr[0].innerText && _qEL.innerText !== '');
 
-// user's turn
+// User's turn
+// Sets the square that was click on to designated letter, void if the square is occupied
 const takeTurn = (index, letter) => {
 	let turnSuccess = true;
 	if (grid()[index].innerText !== '') {
@@ -34,16 +40,16 @@ const takeTurn = (index, letter) => {
 	return turnSuccess;
 };
 
-// opponent's choice
+// Picks a random empty div elements from emptyQs and extract the number using qNumId
 const opponentChoice = () => qNumId(emptyQs()[Math.floor(Math.random() * emptyQs().length)]);
 
-// end game
+// Styles the winning sequence
 const endGame = (winningSequence) => {
 	winningSequence.forEach((_qEL) => _qEL.classList.add('winner'));
 	disableListeners();
 };
 
-// check for victory
+// Checks for victory
 const checkForVictory = () => {
 	let victory = false;
 	winningCombos.forEach((_c) => {
@@ -57,7 +63,7 @@ const checkForVictory = () => {
 	return victory;
 };
 
-// opponent's turn
+// Opponent's turn
 const opponentTurn = () => {
 	disableListeners();
 	setTimeout(() => {
@@ -65,12 +71,12 @@ const opponentTurn = () => {
 	}, 1000);
 };
 
-// click events
+// Clicks events for the user
 const clickFn = ($event) => {
 	if (takeTurn(qNumId($event.target), 'X') && !checkForVictory()) opponentTurn();
 };
 
-// reset the entire grid to empty and remove css effect from the elements
+// Resets the entire grid to empty and removes css effect from the elements
 const resetGame = () => {
 	grid().forEach((_qEL) => {
 		_qEL.innerText = '';
