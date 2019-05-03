@@ -70,6 +70,16 @@ const clickFn = ($event) => {
 	if (takeTurn(qNumId($event.target), 'X') && !checkForVictory()) opponentTurn();
 };
 
+// reset the entire grid to empty and remove css effect from the elements
+const resetGame = () => {
+	grid().forEach((_qEL) => {
+		_qEL.innerText = '';
+		_qEL.classList.remove('winner');
+	});
+	enableListeners();
+};
+
+const newGame = document.querySelector('#new-game').addEventListener('click', resetGame);
 const enableListeners = () => grid().forEach((_qEL) => _qEL.addEventListener('click', clickFn));
 const disableListeners = () => grid().forEach((_qEL) => _qEL.removeEventListener('click', clickFn));
 

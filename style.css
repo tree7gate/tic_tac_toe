@@ -1,8 +1,9 @@
 #container {
+	box-sizing: border-box;
 	width: 320px;
 	height: 320px;
 	margin: auto;
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 #container h1 {
@@ -32,12 +33,39 @@
 	color: red;
 }
 
-#q0, #q1, #q2, #q3, #q4, #q5 {
+#q0,
+#q1,
+#q2,
+#q3,
+#q4,
+#q5 {
 	border-bottom: 10px solid black;
 }
 
-#q2, #q5, #q8, #q1, #q4, #q7 {
+#q2,
+#q5,
+#q8,
+#q1,
+#q4,
+#q7 {
 	border-left: 10px solid black;
 }
 
+.btns {
+	margin: 0 auto;
+	width: 150px;
+	height: 25px;
+	text-align: center;
+}
 
+.btn {
+	display: inline-block;
+	cursor: pointer;
+	border: 2px solid #328492;
+	margin: 0 5px;
+	outline: none;
+	font-weight: 900;
+	font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+	background-color: #fadb7e;
+	border-radius: 5px;
+}
