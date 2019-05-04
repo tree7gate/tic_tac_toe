@@ -85,7 +85,13 @@ const resetGame = () => {
 	enableListeners();
 };
 
-const newGame = document.querySelector('#new-game').addEventListener('click', resetGame);
+const modalSwitch = () => {
+	const menuModal = document.querySelector('#panel');
+	menuModal.style.display = menuModal.style.display ? '' : 'block';
+};
+
+document.querySelector('#new-game').addEventListener('click', resetGame);
+document.querySelector('#menu').addEventListener('click', modalSwitch);
 const enableListeners = () => grid().forEach((_qEL) => _qEL.addEventListener('click', clickFn));
 const disableListeners = () => grid().forEach((_qEL) => _qEL.removeEventListener('click', clickFn));
 
