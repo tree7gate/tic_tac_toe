@@ -43,23 +43,38 @@ const takeTurn = (index, letter) => {
 // Picks a random empty div elements from emptyQs and extract the number using qNumId
 const opponentChoice = () => qNumId(emptyQs()[Math.floor(Math.random() * emptyQs().length)]);
 
+// Checks for draw
+const drawCheck = () => grid().every((_qEL) => _qEL.innerText !== '');
+
 // Styles the winning sequence
 const endGame = (winningSequence) => {
 	winningSequence.forEach((_qEL) => _qEL.classList.add('winner'));
 	disableListeners();
 };
 
-// Checks for victory
+// Changes title to victory message
+const victoryMessage = () => {
+	const message = document.querySelector('.title');
+	message.innerText = 'You Are Victorious!';
+};
+
+// Checks for victory and possible draw
 const checkForVictory = () => {
 	let victory = false;
+	const message = document.querySelector('.title');
 	winningCombos.forEach((_c) => {
 		const _grid = grid();
 		const sequence = [ _grid[_c[0]], _grid[_c[1]], _grid[_c[2]] ];
 		if (allSame(sequence)) {
 			victory = true;
+			victoryMessage();
 			endGame(sequence);
 		}
 	});
+	if (!victory && drawCheck()) {
+		victory = true;
+		message.innerText = `It's a draw!`;
+	}
 	return victory;
 };
 
@@ -67,7 +82,9 @@ const checkForVictory = () => {
 const opponentTurn = () => {
 	disableListeners();
 	setTimeout(() => {
-		if (takeTurn(opponentChoice(), 'O') && !checkForVictory()) enableListeners();
+		if (takeTurn(opponentChoice(), 'O') && !checkForVictory()) {
+			enableListeners();
+		}
 	}, 1000);
 };
 
@@ -78,10 +95,12 @@ const clickFn = ($event) => {
 
 // Resets the entire grid to empty and removes css effect from the elements
 const resetGame = () => {
+	const titleMessage = document.querySelector('.title');
 	grid().forEach((_qEL) => {
 		_qEL.innerText = '';
 		_qEL.classList.remove('winner');
 	});
+	titleMessage.innerText = 'Tic Tac Toe';
 	enableListeners();
 };
 
