@@ -1,7 +1,7 @@
 
 ## Changelog
 ### v1.0
-- Added a feature to stop player from overwriting squares that were already taken.
+- Fixed a bug where player can overwrite squares that were already taken.
 
 ### v1.1
 - Added a new game button where player can click on to restart the game.
@@ -10,3 +10,4 @@
 
 ### v1.2
 - Added a modal to represent the menu where player will be able to set different names. 
+- Added a switch so that modal panel can be turn on and off depending on its state.

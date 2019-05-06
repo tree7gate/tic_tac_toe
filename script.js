@@ -85,13 +85,18 @@ const resetGame = () => {
 	enableListeners();
 };
 
-const modalSwitch = () => {
+// Switches between On and Off state of the Modal Panel for both the 'X' and Menu button
+const modalSwitch = ($event) => {
 	const menuModal = document.querySelector('#panel');
-	menuModal.style.display = menuModal.style.display ? '' : 'block';
+	const closeBtn = document.querySelector('#closebtn');
+	const menuBtn = document.querySelector('#menu');
+
+	if ($event.target === closeBtn) menuModal.style.display = '';
+	if ($event.target === menuBtn) menuModal.style.display = menuModal.style.display ? '' : 'block';
 };
 
+document.addEventListener('click', modalSwitch);
 document.querySelector('#new-game').addEventListener('click', resetGame);
-document.querySelector('#menu').addEventListener('click', modalSwitch);
 const enableListeners = () => grid().forEach((_qEL) => _qEL.addEventListener('click', clickFn));
 const disableListeners = () => grid().forEach((_qEL) => _qEL.removeEventListener('click', clickFn));
 

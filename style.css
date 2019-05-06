@@ -19,6 +19,7 @@
 	border: 1px solid burlywood;
 	background-color: rgb(255, 217, 0);
 	display: none;
+	border-radius: 5px;
 }
 
 #closebtn,
@@ -44,6 +45,11 @@
 #set-name-btn {
 	top: 50px;
 	left: 180px;
+}
+
+.title {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #39cccc;
 }
 
 .q {
