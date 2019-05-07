@@ -14,6 +14,7 @@ const winningCombos = [
 ];
 
 let playerTurn = true;
+let playerName = 'Player';
 
 // Coverts node list to array, this is the entire grid
 const grid = () => Array.from(document.querySelectorAll('.q'));
@@ -65,7 +66,7 @@ const endGame = (winningSequence) => {
 // Changes title to victory message
 const victoryMessage = () => {
 	const message = document.querySelector('.title');
-	message.innerText = playerTurn ? 'You Are Victorious!' : 'You Lost!';
+	message.innerText = playerTurn ? `${playerName}! You Are Victorious!` : `${playerName} Lost!`;
 };
 
 // Checks for victory and possible draw
@@ -124,8 +125,15 @@ const modalSwitch = ($event) => {
 	if ($event.target === menuBtn) menuModal.style.display = menuModal.style.display ? '' : 'block';
 };
 
+const changeName = () => {
+	const inputField = document.querySelector('#name-input');
+	playerName = inputField.value ? inputField.value : 'Player';
+	inputField.value = '';
+};
+
 document.addEventListener('click', modalSwitch);
 document.querySelector('#new-game').addEventListener('click', resetGame);
+document.querySelector('#set-name-btn').addEventListener('click', changeName);
 const enableListeners = () => grid().forEach((_qEL) => _qEL.addEventListener('click', clickFn));
 const disableListeners = () => grid().forEach((_qEL) => _qEL.removeEventListener('click', clickFn));
 

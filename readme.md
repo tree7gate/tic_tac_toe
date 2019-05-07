@@ -15,3 +15,4 @@
 
 ### v1.3
 - Added a switch statement to keep track of player's turn so that results can be presented accordingly.
+- Added the ability to set player name and have it displayed once game is over.
