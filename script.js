@@ -1,7 +1,6 @@
 // To do list
 // Add a score board
 // Implement a modal so that user can modify player name
-// Add a victory message
 
 const winningCombos = [
 	[ 0, 1, 2 ],
@@ -13,6 +12,8 @@ const winningCombos = [
 	[ 1, 4, 7 ],
 	[ 2, 5, 8 ]
 ];
+
+let playerTurn = true;
 
 // Coverts node list to array, this is the entire grid
 const grid = () => Array.from(document.querySelectorAll('.q'));
@@ -35,8 +36,17 @@ const takeTurn = (index, letter) => {
 		turnSuccess = false;
 		return;
 	}
-
 	grid()[index].innerText = letter;
+
+	switch (letter) {
+		case 'X':
+			playerTurn = true;
+			break;
+		case 'O':
+			playerTurn = false;
+			break;
+	}
+
 	return turnSuccess;
 };
 
@@ -55,7 +65,7 @@ const endGame = (winningSequence) => {
 // Changes title to victory message
 const victoryMessage = () => {
 	const message = document.querySelector('.title');
-	message.innerText = 'You Are Victorious!';
+	message.innerText = playerTurn ? 'You Are Victorious!' : 'You Lost!';
 };
 
 // Checks for victory and possible draw

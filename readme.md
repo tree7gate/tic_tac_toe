@@ -12,3 +12,6 @@
 - Added a modal to represent the menu where player will be able to set different names. 
 - Added a switch so that modal panel can be turn on and off depending on its state.
 - Added a draw check and the title changes accordingly.
+
+### v1.3
+- Added a switch statement to keep track of player's turn so that results can be presented accordingly.
